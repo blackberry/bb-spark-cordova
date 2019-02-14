@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-bbmenterprise-support" version="1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>Support</name>
+  <js-module name="auth/MockAuthManager" src="auth/MockAuthManager.js"/>
+  <js-module name="util/Tracker" src="util/Tracker.js"/>
+  <js-module name="util/SpliceListAdapter" src="util/SpliceListAdapter.js"/>
+  <js-module name="util/MessageListSpliceAdapter" src="util/MessageListSpliceAdapter.js"/>
+</plugin>

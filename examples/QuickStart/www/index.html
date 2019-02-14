@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<!--
+  Copyright (c) 2018 BlackBerry. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; connect-src 'self' https://*.bbmenterprise.com wss://*.bbmenterprise.com;">
+    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Quick Start</title>
+  </head>
+  <body>
+    <label class="header">Quick Start</label>
+    <div class="wrapper">
+
+      <div>Setup state:</div>
+      <div id="setupState"></div>
+
+      <div>Auth token state: </div>
+      <div id="authTokenState"></div>
+
+      <div>Registration ID:</div>
+      <div id="regId"></div>
+
+    </div>
+  </body>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</html>

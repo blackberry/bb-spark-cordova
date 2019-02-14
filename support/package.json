@@ -1,0 +1,14 @@
+{
+  "name": "cordova-plugin-bbmenterprise-support",
+  "id": "cordova-plugin-bbmenterprise-support",
+  "license": "Apache-2.0",
+  "displayName": "BlackBerry Spark Communications Services plugin support library",
+  "version": "0.0.1",
+  "description": "Optional auxilliary functions associated with the BlackBerry Spark Communications Services SDK",
+  "author": "BlackBerry",
+  "devDependencies": {
+    "cordova-paramedic": "^0.5.0",
+    "jasmine": "^3.2.0",
+    "xml2js": "^0.4.19"
+  }
+}

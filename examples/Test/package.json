@@ -1,0 +1,28 @@
+{
+    "name": "com.bbm.sdk.support.cordova.Test",
+    "displayName": "Test",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "description": "A sample application to run the BlackBerry Spark Communications Services SDK unit tests",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "cordova-android": "^7.0.0",
+        "cordova-ios": "^4.5.5",
+        "cordova-plugin-bbmenterprise-support-test": "file:../../support/tests",
+        "cordova-plugin-test-framework": "git+https://github.com/apache/cordova-plugin-test-framework.git",
+        "cordova-plugin-bbmenterprise-support-tests": "../../support/tests"
+    },
+    "cordova": {
+        "platforms": [
+            "ios",
+            "android"
+        ],
+        "plugins": {
+            "cordova-plugin-test-framework": {},
+            "cordova-plugin-bbmenterprise-support-tests": {}
+        }
+    }
+}

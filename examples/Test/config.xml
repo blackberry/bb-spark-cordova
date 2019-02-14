@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.bbm.sdk.support.cordova.Test" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Test</name>
+    <description>
+        A test runner for the unit tests associated with the spark SDK.
+    </description>
+    <content src="cdvtests/index.html" />
+    <preference name="android-minSdkVersion" value="22" />
+    <access origin="*" />
+    <plugin name="cordova-plugin-test-framework" spec="https://github.com/apache/cordova-plugin-test-framework.git" />
+    <plugin name="cordova-plugin-bbmenterprise-support-tests" spec="../../support/tests" />
+    <engine name="browser" spec="^5.0.4" />
+</widget>
