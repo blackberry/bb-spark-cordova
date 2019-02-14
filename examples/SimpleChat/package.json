@@ -1,0 +1,38 @@
+{
+  "name": "SimpleChat",
+  "displayName": "Simple Chat Cordova",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "description": "A simple example chat app using the BlackBerry Spark Communications Services SDK and Cordova.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BlackBerry",
+  "dependencies": {
+    "@polymer/iron-list": "^3.0.1",
+    "@polymer/polymer": "^3.0.0",
+    "cordova-android": "^7.1.4",
+    "cordova-ios": "^4.5.5",
+    "cordova-plugin-bbmenterprise": "file:../../BBMEnterprise",
+    "cordova-plugin-bbmenterprise-support": "file:../../support",
+    "cordova-plugin-whitelist": "^1.3.3"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "fs-extra": "^7.0.0",
+    "wct-browser-legacy": "^1.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-bbmenterprise-support": {},
+      "cordova-plugin-bbmenterprise": {}
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
+}

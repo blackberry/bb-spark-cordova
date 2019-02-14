@@ -1,0 +1,47 @@
+repositories {
+  google()
+  jcenter()
+  flatDir {
+    dirs 'libs'
+  }
+}
+
+android {
+  defaultConfig {
+    // multiDexEnabled true
+  }
+
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.google.gms:google-services:4.0.2'
+    }
+}
+
+dependencies {
+  implementation(name: 'bbm_sdk-release', ext: 'aar')
+  implementation(name: 'Support', ext: 'aar')
+
+  implementation 'com.android.support:appcompat-v7:27.1.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+  implementation 'com.android.support:design:27.1.0'
+
+  // Firebase Cloud Messaging dependencies (for push support)
+  implementation 'com.google.firebase:firebase-messaging:17.3.2'
+
+  //Just get the android stuff, some other stuff in the full guava break builds on pre android 24
+  api 'com.google.guava:guava:25.1-android'
+}
+
+// By applying the plugin below this will ensure the project will not compile
+// if google-services.json is missing. When setting up this example please
+// ensure you follow https://developers.google.com/identity/sign-in/android/start
+// and download the resulting google-services.json file.
+
+apply plugin: com.google.gms.googleservices.GoogleServicesPlugin

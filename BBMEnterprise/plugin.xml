@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-bbmenterprise" version="1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>BBMEnterprise</name>
+  <js-module name="Spark" src="www/Spark.js">
+    <clobbers target="BBMEnterprise"/>
+  </js-module>
+
+  <js-module name="classes/Lists" src="www/classes/Lists.js"></js-module>
+  <js-module name="classes/Messages" src="www/classes/Messages.js"></js-module>
+  <js-module name="classes/IncomingMessages" src="www/classes/IncomingMessages.js"></js-module>
+  <js-module name="classes/Globals" src="www/classes/Globals.js"></js-module>
+
+  <js-module name="utils/Observable" src="www/utils/Observable.js"></js-module>
+  <js-module name="utils/ObservableList" src="www/utils/ObservableList.js"></js-module>
+  <js-module name="utils/Monitor" src="www/utils/Monitor.js"></js-module>
+  <js-module name="utils/Message" src="www/utils/Message.js"></js-module>
+  <js-module name="utils/IncomingMessages" src="www/utils/IncomingMessages.js"></js-module>
+
+  <platform name="android">
+    <framework custom="true" src="src/android/spark-support.gradle" type="gradleReference"/>
+    <framework src="com.google.firebase:firebase-core:16.0.3" />
+    <framework src="com.google.firebase:firebase-messaging:17.3.2" />
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.CAMERA"/>
+
+        <!-- Permissions required for voice calling -->
+        <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+        <uses-permission android:name="android.permission.BLUETOOTH"/>
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+        <uses-permission android:name="android.permission.VIBRATE"/>
+    </config-file>
+
+    <resource-file src="src/android/sdk/bbm_sdk-release.aar" target="../../libs/bbm_sdk-release.aar"/>
+    <resource-file src="src/android/examples/Support/Support/output/Support-_mockProvider-release.aar" target="../../libs/Support.aar"/>
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="SparkProxy">
+        <param name="android-package" value="com.bbm.sdk.support.cordova.SparkProxy" />
+      </feature>
+    </config-file>
+
+    <!-- <config-file parent="/*" target="AndroidManifest.xml"> -->
+    <config-file parent="./application" target="app/src/main/AndroidManifest.xml">
+
+      <!--Set this to false to disable logging to files, this will allow the logs to be shown in logcat. The SDK does not
+      attempt to log to both files and logcat-->
+      <meta-data android:name="com.bbm.sdk.LogToFiles"
+                 android:value="false" />
+
+      <!-- Change to Warn/Debug to increase logging -->
+      <meta-data android:name="com.bbm.sdk.NativeMinLogLevel" android:value="android.util.Log.Debug"/>
+      <meta-data android:name="com.bbm.sdk.MinLogLevel" android:value="android.util.Log.Debug"/>
+
+      <!-- [Start] Firebase Cloud Messaging -->
+      <!-- Listener for push notifications-->
+      <service android:name="com.bbm.sdk.support.cordova.SparkFirebaseMessagingService">
+          <intent-filter>
+              <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+      </service>
+      <!-- [END] Firebase Cloud Messaging -->
+    </config-file>
+
+    <source-file src="src/android/com/bbm/sdk/support/cordova/SparkProxy.java" target-dir="src/spark/com/bbm/sdk/support/cordova/" />
+    <source-file src="src/android/com/bbm/sdk/bbmds/ProxiedMessage.java" target-dir="src/spark/com/bbm/sdk/bbmds/" />
+    <source-file src="src/android/com/bbm/sdk/support/cordova/CordovaHelper.java" target-dir="src/com/bbm/sdk/support/cordova" />
+    <source-file src="src/android/com/bbm/sdk/support/cordova/SparkFirebaseMessagingService.java" target-dir="src/com/bbm/sdk/support/cordova" />
+
+    <hook type="before_plugin_install" src="scripts/androidBeforeInstall.js" />
+  </platform>
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="SparkProxy">
+        <param name="ios-package" value="SparkProxy" />
+      </feature>
+    </config-file>
+    <preference name="CAMERA_USAGE_DESCRIPTION" default="This app needs camera access in order to make video calls."/>
+    <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+      <string name="custom">$CAMERA_USAGE_DESCRIPTION</string>
+    </config-file>
+    <preference name="MICROPHONE_USAGE_DESCRIPTION" default="This app needs microphone access in order to make calls."/>
+    <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+      <string name="custom">$MICROPHONE_USAGE_DESCRIPTION</string>
+    </config-file>
+    <resource-file src="src/ios/examples/Support/Source/UI/MediaCalls/MediaCallViewController.xib"/>
+    <source-file src="src/apple/SparkProxy.m"/>
+    <header-file src="src/ios/examples/Support/Source/Auth/BBMAuthenticatedAccount.h"/>
+    <source-file src="src/ios/examples/Support/Source/BBMDS/BBMAccess.m"/>
+    <header-file src="src/ios/examples/Support/Source/BBMDS/BBMAccess.h"/>
+    <source-file src="src/ios/examples/Support/Source/BBMDS/BBMChatMessageListener.m"/>
+    <header-file src="src/ios/examples/Support/Source/BBMDS/BBMChatMessageListener.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallManager.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallManager.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallViewController.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallViewController.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallContentView.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMMediaCallContentView.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMCallKitManager.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/MediaCalls/BBMCallKitManager.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/Notifications/BBMMessageNotificationView.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/Notifications/BBMMessageNotificationView.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/Notifications/BBMLocalNotificationManager.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/Notifications/BBMLocalNotificationManager.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/BBMUIUtilities.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/BBMUIUtilities.h"/>
+    <header-file src="src/ios/examples/Support/Source/UI/BBMUIWidgets.h"/>
+    <header-file src="src/ios/examples/Support/Source/UI/BBMUIWidgetsConfig.h"/>
+    <header-file src="src/ios/examples/Support/Source/UI/BBMMessageTypes.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/ChatRenderer/Controller/BBMTimedMessageManager.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/ChatRenderer/Controller/BBMTimedMessageManager.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/ChatRenderer/Controller/BBMMessageLoader.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/ChatRenderer/Controller/BBMMessageLoader.h"/>
+    <header-file src="src/ios/examples/Support/Source/UI/Model Extensions/BBMChatMessage+Extensions.h"/>
+    <source-file src="src/ios/examples/Support/Source/UI/Util/UIView+Extra.m"/>
+    <header-file src="src/ios/examples/Support/Source/UI/Util/UIView+Extra.h"/>
+    <source-file src="src/ios/examples/Support/Source/User/BBMAppUser.m"/>
+    <header-file src="src/ios/examples/Support/Source/User/BBMAppUser.h"/>
+    <header-file src="src/ios/examples/Support/Source/User/BBMAppUserListener.h"/>
+    <source-file src="src/ios/examples/Support/Source/User/BBMUserManager.m"/>
+    <header-file src="src/ios/examples/Support/Source/User/BBMUserManager.h"/>
+    <header-file src="src/ios/examples/Support/Source/User/BBMAppUserSource.h"/>
+    <source-file src="src/ios/examples/Support/Source/Util/BBMImageCache.m"/>
+    <header-file src="src/ios/examples/Support/Source/Util/BBMImageCache.h"/>
+    <source-file src="src/ios/examples/Support/Source/Util/BBMImageLoader.m"/>
+    <header-file src="src/ios/examples/Support/Source/Util/BBMImageLoader.h"/>
+    <header-file src="src/ios/examples/Support/Source/Util/BBMImageProvider.h"/>
+    <source-file src="src/ios/examples/Support/Source/Util/BBMUtilities.m"/>
+    <header-file src="src/ios/examples/Support/Source/Util/BBMUtilities.h"/>
+    <header-file src="src/ios/examples/Support/Source/Util/NSURL+Archiving.h"/>
+    <framework custom="true"
+               embed="true"
+               src="src/ios/sdk/BBMEnterprise.framework"/>
+    <hook type="before_plugin_install" src="scripts/iosBeforeInstall.js" />
+  </platform>
+  <platform name="osx">
+    <config-file target="config.xml" parent="/*">
+      <feature name="SparkProxy">
+        <param name="osx-package" value="SparkProxy" />
+      </feature>
+    </config-file>
+    <source-file src="src/apple/SparkProxy.m"/>
+    <framework custom="true"
+               embed="true"
+               src="src/osx/BBMEnterprise.framework"/>
+  </platform>
+  <platform name="browser">
+    <config-file target="config.xml" parent="/*">
+      <feature name="Spark">
+        <param name="browser-package" value="Spark"/>
+      </feature>
+    </config-file>
+    <js-module src="src/browser/SparkProxy.js" name="SparkProxy">
+      <runs/>
+    </js-module>
+    <js-module src="src/browser/bbm_sdk.js" name="bbm_sdk">
+      <runs/>
+    </js-module>
+    <asset src="src/browser/argon2.wasm" target="argon2.wasm"/>
+  </platform>
+</plugin>

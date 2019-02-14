@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-bbmenterprise-support-tests" version="1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+  <name>Spark Support Plugin Tests</name>
+  <js-module name="tests" src="tests.js">
+  </js-module>
+  <dependency id="support" url="." subdir="support"/>
+</plugin>
