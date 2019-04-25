@@ -6,10 +6,6 @@
   "version": "1.0.0",
   "description": "Plugin to access the BlackBerry Spark Communications Services SDK",
   "author": "BlackBerry",
-  "dependencies": {
-    "cordova-android": "^7.0.0",
-    "cordova-plugin-whitelist": "^1.3.3"
-  },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {}

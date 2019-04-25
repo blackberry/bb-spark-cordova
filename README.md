@@ -4,7 +4,7 @@ Introduction
 
 This repository contains code to use the BlackBerry Spark Communications
 Services SDK from an Apache Cordova environment. The supported platforms are
-Android and iOS.
+Android and iOS. It has been verified to work in Cordova 8.0 and 9.0.
 
 This code provides a layer on top of the Spark Communications SDK. The SDK
 itself must be obtained separately.
